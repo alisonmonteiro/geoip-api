@@ -1,8 +1,8 @@
-= GeoIP API
+# GeoIP API
 
 This is a simple node server with the sole purpose of returning a JSON blob describing the geographic information of an IP. 
 
-== Getting Started
+## Getting Started
 
 To install, simply run:
 
@@ -15,8 +15,11 @@ Update the MaxMind GEO IP DB:
 To start the server, run:
 
     Run `node server.js`
+    
+Note, you can export the environment variable `PORT` to change the listening port of the server. The default port is `8000`. To enable debugging, export `DEBUG` to some value greater than 0. 
 
-== Query the API
+
+## Query the API
 
 You can query the API passing an IP:
 
@@ -26,7 +29,7 @@ Or you can rely on the public IP being determined by server:
 
     curl http://localhost:8000/locate
 
-== Response format
+## Response format
 
 A successful response will look like this:
 
@@ -48,7 +51,7 @@ An unsuccessful response will look something more like this:
     }
 
 
-== Other info
+## Other info
 
 Checkout the Dockerfile for how to build a container from this package.
 
