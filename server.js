@@ -1,8 +1,7 @@
 var express = require('express');
 var geoip = require('geoip-lite');
 
-
-var port = process.env.APP_PORT || 8000
+var port = process.env.PORT || 8000
 var debug = process.env.DEBUG || 0;
 var app = express();
 
@@ -52,7 +51,7 @@ app.get('/locate', function(req, res) {
 });
 
 var server = app.listen(port, function() {
-  console.log('GeoIP: Web service listening on port ' + server.address().port);
+  console.log('GeoIP API: Web service listening on port ' + server.address().port);
 });
 
 

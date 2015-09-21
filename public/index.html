@@ -3,19 +3,21 @@
      <script type="text/javascript"src="/client.js" type="text/javascript"></script>
   </head>
   <body>
-  <script>
-    window.onload = function () {
-      var success = function(ip, json) {
-        window.console && console.log('success', ip, json);
-      };
-      var error = function(ip, error) {
-        window.console && console.log('error', ip, error);        
-      }
+    <script>
+      window.onload = function () {
+        var success = function(ip, json) {
+          window.console && console.log('success', ip, json);
+        };
+        var error = function(ip, error) {
+          window.console && console.log('error', ip, error);        
+        }
 
-      GeoIP.locate(success, error);
-        
-    };
-  </script>
-  
+        GeoIP.locate(success, error);
+      };
+    </script>
+    <h1>GeoIP Test Page</h1>
+    <div>
+      Check the window debug console for output. 
+    </div>
   </body>
 </html>
