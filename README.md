@@ -45,6 +45,7 @@ A successful response will look like this:
     }
 
 An unsuccessful response will look something more like this:
+
     {
       ip: "172.56.38.211",
       error: "Something went wrong"
