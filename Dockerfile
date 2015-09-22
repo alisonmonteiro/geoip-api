@@ -11,15 +11,15 @@ WORKDIR /
 RUN apt-get update && \
     apt-get install -y --no-install-recommends git nodejs npm ca-certificates && \
     ln -s /usr/bin/nodejs /usr/bin/node && \
-    apt-get clean && \
-    ln -s /usr/bin/nodejs /usr/bin/node && \
-    git clone $GIT_REPO /geoip-api && \
+    apt-get clean 
+
+RUN git clone $GIT_REPO /geoip-api && \
     rm -rf /geoip-api/.git && \
-    cd /geoip-api/ && npm -g install && \
-    cd /usr/local/lib/node_modules/geoip-lite/ && npm run-script updatedb
+    cd /geoip-api/ && npm install && \
+    cd node_modules/geoip-lite/ && npm run-script updatedb
 
 WORKDIR /geoip-api
 
 EXPOSE 8000
 
-ENTRYPOINT ["/usr/bin/nodejs", "/geoip-api/server.js"]   
+ENTRYPOINT ["/usr/bin/nodejs", "/geoip-api/server.js"]
