@@ -16,6 +16,8 @@ var GeoIP;
       return this;
     };
 
+    GeoIP.location = false;
+
     GeoIP.endpoint = '/locate';
  
     GeoIP.locate = function(successCallback, errorCallback, ip) {
@@ -37,6 +39,7 @@ var GeoIP;
             }
            } else {
             if(successCallback) {
+              GeoIP.location = json;
               successCallback(json.ip, json, location);
             }
           }
