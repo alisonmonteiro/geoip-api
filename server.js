@@ -1,12 +1,9 @@
 var express = require('express');
 var geoip = require('geoip-lite');
 
-var port = process.env.PORT || 8000
-var debug = process.env.DEBUG || 0;
+var port = process.env.PORT || 8000;
+var dev = process.env.NODE_ENV !== 'production';
 var app = express();
-
-// Enable serving of static assets in public
-app.use(express.static('public'));
 
 // Enable CORS
 app.all('*', function(req, res, next) {
@@ -14,15 +11,15 @@ app.all('*', function(req, res, next) {
   res.header('Access-Control-Allow-Headers', 'X-Requested-With');
   res.header('Content-Type', 'application/json');
   next();
- });
+});
  
-app.get('/locate', function(req, res) {
+app.get('/api', function(req, res) {
   // Getting the ip of the client from the query parameter, request headers or remoteAddress
-  var ip = req.query.ip,
-      xForwardedFor = (req.headers['x-forwarded-for'] || '').split(/,/)[0],
-      remoteAddress = req.connection.remoteAddress,
-      geo,
-      response;
+  var ip = req.query.ip;
+  var xForwardedFor = (req.headers['x-forwarded-for'] || '').split(/,/)[0];
+  var remoteAddress = req.connection.remoteAddress;
+  var geo;
+  var response;
 
   ip = ip || xForwardedFor || remoteAddress;
 
@@ -44,14 +41,14 @@ app.get('/locate', function(req, res) {
     city: 'San Francisco',
     ll: [37.7484, -122.4156] }
     */  
-  if(debug > 0) {
+  if (dev) {
     console.log('reply', response);
   }
   res.end(response);
 });
 
-var server = app.listen(port, function() {
-  console.log('GeoIP API: Web service listening on port ' + server.address().port);
+app.listen(port, function() {
+  console.log('API listening on port ' + port);
 });
 
 
